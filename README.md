@@ -1,5 +1,5 @@
 # gulp-merge-translations 
-Do you use use [angular-translate](https://github.com/angular-translate/angular-translate)? Do you use use `angular-translate-loader-static-files`?
+Do you use use [angular-translate](https://github.com/angular-translate/angular-translate)? Do you use use [angular-translate-loader-static-files](https://github.com/angular-translate/bower-angular-translate-loader-static-files)?
 Then you can have translations files per module, merged into a single file per locale, configure [angular-translate](https://github.com/angular-translate/angular-translate) just once and make a single request to load translations.
 
 <a href="#install">Install</a> |
@@ -11,7 +11,7 @@ Then you can have translations files per module, merged into a single file per l
 
 ## Install
 
-Install with [npm](https://npmjs.org/package/gulp-merge-translations)
+Install with [npm](https://npmjs.org/package/gulp-merge-translations). Coming soon as it is not ready yet.
 
 ```
 npm install gulp-merge-translations --save-dev
@@ -68,7 +68,7 @@ The final file name will be `fileName` + `settings.sep` + '.json'
  - **jsonSpace** {Function} See JSON.stringify for reference. Pass a number or `\t` for debugging the output file. Default: undefined
 
  
-More than an extension or lib, this is a way of using [angular-translate](https://github.com/angular-translate/angular-translate) and `angular-translate-loader-static-files` together. But, note that this is not bind to any of this libraries as we are merging raw json files, so, the way of use it is all up to you.  
+More than an extension or lib, this is a way of using [angular-translate](https://github.com/angular-translate/angular-translate) and [angular-translate-loader-static-files](https://github.com/angular-translate/bower-angular-translate-loader-static-files) together. But, note that this is not bind to any of this libraries as we are merging raw json files, so, the way of use it is all up to you.
 
 
 ## License
