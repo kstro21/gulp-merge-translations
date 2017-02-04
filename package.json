@@ -1,0 +1,42 @@
+{
+  "author": {
+    "name": "Castro Roy",
+    "email": "ycastro.roy@gmail.com"
+  },
+  "bugs": {
+    "url": "https://github.com/kstro21/gulp-merge-translations/issues"
+  },
+  "dependencies": {
+    "gulp-util": "^3.0.6",
+    "through": "^2.3.8"
+  },
+  "description": "A gulp plugin to merge JSON files into one file",
+  "devDependencies": {
+    "gulp": "^3.9.0"
+  },
+  "directories": {},
+  "homepage": "https://github.com/kstro21/gulp-merge-translations",
+  "keywords": [
+    "angular-translate",
+    "gulp",
+    "json",
+    "merge"
+  ],
+  "license": "MIT",
+  "main": "./index.js",
+  "maintainers": [
+    {
+      "name": "kstro21",
+      "email": "ycastro.roy@gmail.com"
+    }
+  ],
+  "name": "gulp-merge-translations",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kstro21/gulp-merge-translations.git"
+  },
+  "scripts": {},
+  "version": "0.1.0"
+}
