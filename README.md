@@ -11,7 +11,7 @@ Then you can have translations files per module, merged into a single file per l
 
 ## Install
 
-Install with [npm](https://npmjs.org/package/gulp-merge-translations). Coming soon as it is not ready yet.
+Install with [npm](https://npmjs.org/package/gulp-merge-translations)
 
 ```
 npm install gulp-merge-translations --save-dev
