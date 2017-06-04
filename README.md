@@ -1,5 +1,5 @@
 # gulp-merge-translations 
-Do you use use [angular-translate](https://github.com/angular-translate/angular-translate)? Do you use use [angular-translate-loader-static-files](https://github.com/angular-translate/bower-angular-translate-loader-static-files)?
+Do you use [angular-translate](https://github.com/angular-translate/angular-translate)? Do you use [angular-translate-loader-static-files](https://github.com/angular-translate/bower-angular-translate-loader-static-files)?
 Then you can have translations files per module, merged into a single file per locale, configure [angular-translate](https://github.com/angular-translate/angular-translate) just once and make a single request to load translations.
 
 <a href="#install">Install</a> |
