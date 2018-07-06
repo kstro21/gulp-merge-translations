@@ -12,9 +12,9 @@
   },
   "description": "A gulp plugin to merge JSON files into one file grouped by a pattern.",
   "devDependencies": {
-    "gulp": "^3.9.0",
-    "vinyl": "^2.0.0",
-    "jasmine": "^2.6.0"
+    "gulp": "^4.0.0",
+    "jasmine": "^2.6.0",
+    "vinyl": "^2.0.0"
   },
   "directories": {},
   "homepage": "https://github.com/kstro21/gulp-merge-translations",
