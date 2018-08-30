@@ -1,4 +1,5 @@
-const gutil = require('gulp-util');
+const PluginError = require('plugin-error');
+const Vinyl = require('vinyl');
 const path = require('path');
 const through = require('through');
 
@@ -27,45 +28,45 @@ module.exports = function (fileName = 'translations', settings = {}) {
     const mergeds = {};
     let fileInfo = null;
 
-    function mergeFile(file) {
-        if (file.isNull()) {
-            return this.queue(file);
+	function validFile(file) {
+		if (file.isNull()) {
+            this.queue(file);
+        } else if (file.isStream()) {
+            this.emit('error', new PluginError(PLUGIN_NAME, `${PLUGIN_NAME} + : Streaming not supported!`));
         }
-
-        if (file.isStream()) {
-            return this.emit('error', new gutil.PluginError(PLUGIN_NAME, PLUGIN_NAME + ': Streaming not supported!'));
-        }
-
-        const locale = config.getLocale(path.basename(file.path));
-
-        if(!locale) {
-            return gutil.log('WARNING: invalid file name, no locale can be found, ignoring file:', file.path);
-        }
-
-        if (!fileInfo) {
+	}
+	
+	function setFileInfo(file) {
+		if (!fileInfo) {
             fileInfo = file;
         }
+	}
+	
+	function shouldIgnore(locale, contentString) {
+		return !(locale && contentString.indexOf('{') === 0);
+	}
+	
+    function mergeFile(file) {
+        validFile.call(this, file);
+        setFileInfo(file);
 
+        const locale = config.getLocale(path.basename(file.path));
         const contentString = file.contents.toString('utf8').trim();
 
-        if(contentString.indexOf('{') !== 0) {
-            return gutil.log('WARNING: file must only contain object as root, ignoring file:', file.path);
-        }
+        if(shouldIgnore(locale, contentString)) {
+            console.warn('WARNING: invalid file name, no locale can be found, ignoring file:', file.path);
+        } else {
+			let parsed = {};
+			try {
+				parsed = JSON.parse(contentString);
 
-        let parsed = {};
-        try {
-            parsed = JSON.parse(contentString);
-        } catch(err) {
-            err.message = 'ERROR: parsing ' + file.path + ': ' + err.message;
-            return this.emit('error', new gutil.PluginError(PLUGIN_NAME, err));
-        }
+				mergeds[locale] = mergeds[locale] || {};
 
-        if(!mergeds[locale]) {
-            mergeds[locale] = {};
-        }
-
-        config.merge(mergeds[locale], parsed);
-
+				config.merge(mergeds[locale], parsed);
+			} catch(err) {
+				this.emit('error', new PluginError(PLUGIN_NAME, `parsing ${file.path}: ${err.message}`));
+			}
+		}
     }
 
     /**
@@ -76,7 +77,7 @@ module.exports = function (fileName = 'translations', settings = {}) {
             const merged = mergeds[locale];
             const contents = JSON.stringify(merged, config.jsonReplacer, config.jsonSpace);
 
-            this.emit('data', new gutil.File({
+            this.emit('data', new Vinyl({
                 cwd: fileInfo.cwd,
                 base: fileInfo.base,
                 path: path.join(fileInfo.base, `${fileName}${config.sep}${locale}.json`),
